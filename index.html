@@ -576,7 +576,7 @@
           <option value="">בחר אופן תשלום...</option>
           <option value="מזומן">💵 מזומן</option>
           <option value="ביט">📱 ביט</option>
-          <option value="פייבוקס">📱 פייבוקס (5% הנחה)</option>
+          <option value="פייבוקס">📱 פייבוקס</option>
         </select>
       </div>
       <div class="form-row">
@@ -654,11 +654,28 @@ function submitOrder() {
   const apartment = document.getElementById('apartment').value.trim();
   const payment = document.getElementById('payment').value;
   const product = document.getElementById('product').value.trim();
+
   if (!name || !phone || !building || !floor || !apartment || !payment || !product) {
     alert('אנא מלא את כל השדות החובה');
     return;
   }
 
+  // שלח למייל דרך Formspree
+  fetch('https://formspree.io/f/xlgoroqr', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      שם: name,
+      טלפון: phone,
+      'בניין/מגדל': building,
+      קומה: floor,
+      דירה: apartment,
+      תשלום: payment,
+      הזמנה: product
+    })
+  });
+
+  // שלח גם בוואטסאפ
   const msg = `הזמנה חדשה מהאתר 🥤\n\nשם: ${name}\nטלפון: ${phone}\nבניין/מגדל: ${building}\nקומה: ${floor} | דירה: ${apartment}\nתשלום: ${payment}\nהזמנה: ${product}`;
   const url = `https://wa.me/972502113545?text=${encodeURIComponent(msg)}`;
   window.open(url, '_blank');
