@@ -308,9 +308,17 @@
     font-size: 0.9rem; font-weight: 500; margin-top: 1rem;
   }
 
+  .mobile-drinks-btn { display: none; }
   @media (max-width: 600px) {
     nav { padding: 1rem 1.2rem; }
     .nav-links { display: none; }
+    .mobile-drinks-btn {
+      display: inline-block;
+      background: var(--accent); color: var(--black);
+      font-weight: 700; font-family: 'Heebo', sans-serif;
+      font-size: 0.9rem; padding: 0.5rem 1.1rem;
+      border-radius: 20px; text-decoration: none;
+    }
     .hero { padding: 7rem 1.2rem 3rem; }
     section { padding: 3.5rem 1.2rem; }
     .order-box { padding: 1.5rem; }
@@ -323,6 +331,7 @@
 <!-- NAV -->
 <nav>
   <div class="logo">הלני שתייה</div>
+  <a href="drinks.html" class="mobile-drinks-btn">כל השתייה</a>
   <ul class="nav-links">
     <li><a href="#products">מוצרים</a></li>
     <li><a href="drinks.html">כל השתייה</a></li>
