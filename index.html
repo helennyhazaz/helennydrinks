@@ -362,62 +362,66 @@
         <a href="https://wa.me/972502113545" target="_blank" style="color:#25d366; font-weight:600; text-decoration:none;">שלח הודעה בוואטסאפ ↗</a>
       </div>
     </div>
-    <!-- החברה המרכזית -->
-    <div class="category-header">
-      <div class="category-title">החברה המרכזית</div>
-      <div class="category-line"></div>
-    </div>
-    <div class="products-grid">
-      <div class="product-card">
-        <span class="product-emoji">🥤</span>
-        <div class="product-name">ארגז קולה</div>
-        <div class="product-desc">קוקה קולה — הטעם המוכר שכולם אוהבים</div>
-        <select id="cola-variant" style="width:100%; background:#1e1e1e; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:0.5rem 0.8rem; color:#fff; font-family:'Heebo',sans-serif; font-size:0.85rem; margin-bottom:1rem; outline:none;">
-          <option value="">בחר סוג...</option>
-          <option>קולה רגילה</option>
-          <option>קולה זירו</option>
-        </select>
-        <div class="product-footer">
-          <div class="product-price">₪114 <span>לארגז</span></div>
-          <button class="add-btn" onclick="selectWithFlavor('ארגז קולה','cola-variant',114)">הוסף</button>
-        </div>
-      </div>
-      <div class="product-card">
-        <span class="product-emoji">💚</span>
-        <div class="product-name">ארגז ספרייט</div>
-        <div class="product-desc">ספרייט — לימון ליים קריר ומרענן</div>
-        <select id="sprite-variant" style="width:100%; background:#1e1e1e; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:0.5rem 0.8rem; color:#fff; font-family:'Heebo',sans-serif; font-size:0.85rem; margin-bottom:1rem; outline:none;">
-          <option value="">בחר סוג...</option>
-          <option>ספרייט רגיל</option>
-          <option>ספרייט זירו</option>
-        </select>
-        <div class="product-footer">
-          <div class="product-price">₪114 <span>לארגז</span></div>
-          <button class="add-btn" onclick="selectWithFlavor('ארגז ספרייט','sprite-variant',114)">הוסף</button>
-        </div>
-      </div>
-      <div class="product-card">
-        <span class="product-emoji">🍊</span>
-        <div class="product-name">ארגז פאנטה</div>
-        <div class="product-desc">פאנטה — טעם פירותי ומתוק לכל גיל</div>
-        <select id="fanta-variant" style="width:100%; background:#1e1e1e; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:0.5rem 0.8rem; color:#fff; font-family:'Heebo',sans-serif; font-size:0.85rem; margin-bottom:1rem; outline:none;">
-          <option value="">בחר סוג...</option>
-          <option>פאנטה רגילה</option>
-          <option>פאנטה זירו</option>
-        </select>
-        <div class="product-footer">
-          <div class="product-price">₪114 <span>לארגז</span></div>
-          <button class="add-btn" onclick="selectWithFlavor('ארגז פאנטה','fanta-variant',114)">הוסף</button>
-        </div>
-      </div>
-    </div>
-
     <!-- שתייה קלה -->
     <div class="category-header">
       <div class="category-title">שתייה קלה</div>
       <div class="category-line"></div>
     </div>
     <div class="products-grid">
+      <div class="product-card">
+        <span class="product-emoji">🥤</span>
+        <div class="product-name">ארגז קולה</div>
+        <div class="product-desc">קוקה קולה קלאסיק — הטעם המוכר שכולם אוהבים</div>
+        <div class="product-footer">
+          <div class="product-price">₪114 <span>לארגז</span></div>
+          <button class="add-btn" onclick="selectProduct('ארגז קולה',114)">הוסף</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">⚫</span>
+        <div class="product-name">ארגז קולה זירו</div>
+        <div class="product-desc">קוקה קולה זירו — ללא סוכר, עם כל הטעם</div>
+        <div class="product-footer">
+          <div class="product-price">₪114 <span>לארגז</span></div>
+          <button class="add-btn" onclick="selectProduct('ארגז קולה זירו',114)">הוסף</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">💚</span>
+        <div class="product-name">ארגז ספרייט</div>
+        <div class="product-desc">ספרייט — לימון ליים קריר ומרענן</div>
+        <div class="product-footer">
+          <div class="product-price">₪114 <span>לארגז</span></div>
+          <button class="add-btn" onclick="selectProduct('ארגז ספרייט',114)">הוסף</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">🌿</span>
+        <div class="product-name">ארגז ספרייט זירו</div>
+        <div class="product-desc">ספרייט זירו — ללא סוכר, מרענן כמו תמיד</div>
+        <div class="product-footer">
+          <div class="product-price">₪114 <span>לארגז</span></div>
+          <button class="add-btn" onclick="selectProduct('ארגז ספרייט זירו',114)">הוסף</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">🍊</span>
+        <div class="product-name">ארגז פאנטה</div>
+        <div class="product-desc">פאנטה — טעם פירותי ומתוק לכל גיל</div>
+        <div class="product-footer">
+          <div class="product-price">₪114 <span>לארגז</span></div>
+          <button class="add-btn" onclick="selectProduct('ארגז פאנטה',114)">הוסף</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">🍋</span>
+        <div class="product-name">ארגז פאנטה זירו</div>
+        <div class="product-desc">פאנטה זירו — פירותי ומתוק ללא סוכר</div>
+        <div class="product-footer">
+          <div class="product-price">₪114 <span>לארגז</span></div>
+          <button class="add-btn" onclick="selectProduct('ארגז פאנטה זירו',114)">הוסף</button>
+        </div>
+      </div>
       <div class="product-card">
         <span class="product-emoji">💧</span>
         <div class="product-name">ארגז מים 500 מ"ל</div>
