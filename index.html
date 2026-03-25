@@ -358,9 +358,22 @@
       <div class="section-title">בחר את הארגז שלך</div>
       <div class="section-sub">מגוון רחב של ארגזי שתייה — בכל גדלים ולכל אירוע.</div>
       <div style="margin-top:1rem; font-size:0.9rem; color:rgba(255,255,255,0.4); font-weight:300;">
-        לא מוצא פה את מה שאתה רוצה? כנראה שיש לי —
-        <a href="https://wa.me/972502113545" target="_blank" style="color:#25d366; font-weight:600; text-decoration:none;">שלח הודעה בוואטסאפ ↗</a>
+        לא מוצא פה את מה שאתה רוצה? ניתן לחפש בחיפוש שאר השתייה שאני מוכר —
+        או <a href="https://wa.me/972502113545" target="_blank" style="color:#25d366; font-weight:600; text-decoration:none;">שלח הודעה בוואטסאפ ↗</a>
       </div>
+      <div style="margin-top:1.5rem; position:relative; max-width:420px; margin-left:auto; margin-right:auto;">
+        <input type="text" id="search-input" placeholder="🔍 חפש שתייה..." oninput="searchProducts()"
+          style="width:100%; box-sizing:border-box; background:#1e1e1e; border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:0.85rem 1.2rem; color:#fff; font-family:'Heebo',sans-serif; font-size:1rem; outline:none; transition:border 0.2s;"
+          onfocus="this.style.borderColor='rgba(255,255,255,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+      </div>
+    </div>
+    <!-- תוצאות חיפוש -->
+    <div id="search-results-section" style="display:none;">
+      <div class="category-header">
+        <div class="category-title">תוצאות חיפוש</div>
+        <div class="category-line"></div>
+      </div>
+      <div id="search-results-grid" class="products-grid"></div>
     </div>
     <!-- שתייה קלה -->
     <div class="category-header">
@@ -609,6 +622,96 @@ function selectProduct(name, price) {
   fab.classList.remove('pop');
   void fab.offsetWidth;
   fab.classList.add('pop');
+}
+
+const catalogItems = [
+  // פאנטה ₪111
+  {name:'ארגז פאנטה',                          price:111},
+  {name:'ארגז דיאט קולה',                       price:111},
+  {name:'ארגז פאנטה זירו',                       price:111},
+  {name:'ארגז פאנטה אקזוטי',                    price:111},
+  {name:'ארגז פאנטה תות',                        price:111},
+  {name:'ארגז פאנטה ענבים',                      price:111},
+  // פפסי / מירנדה / סבן אפ ₪96
+  {name:'ארגז פפסי',                             price:96},
+  {name:'ארגז פפסי מקס',                         price:96},
+  {name:'ארגז מירנדה',                           price:96},
+  {name:'ארגז סבן אפ',                           price:96},
+  {name:'ארגז סבן אפ זירו',                      price:96},
+  // שוופס זכוכית ₪130
+  {name:'ארגז שוופס תפוח זכוכית',               price:130},
+  {name:'ארגז שוופס תות ליים זכוכית',           price:130},
+  {name:'ארגז שוופס ענבים זכוכית',              price:130},
+  {name:'ארגז שוופס פירות יער זכוכית',          price:130},
+  {name:'ארגז שוופס אפרסק זכוכית',              price:130},
+  {name:'ארגז שוופס לימונייד זכוכית',           price:130},
+  // שוופס פחית ₪96
+  {name:'ארגז שוופס תות פחית',                  price:96},
+  // שוופס ביטר למון / טמפו
+  {name:'ארגז שוופס ביטר למון זכוכית',          price:170},
+  {name:'ארגז טמפו גינגר אייל זכוכית',          price:160},
+  // קולה / ספרייט בקבוק ₪150
+  {name:'ארגז קולה בקבוק 500מ"ל',              price:150},
+  {name:'ארגז קולה זירו בקבוק 500מ"ל',         price:150},
+  // זכוכית ₪150
+  {name:'ארגז קולה זכוכית 350מ"ל',             price:150},
+  {name:'ארגז קולה זירו זכוכית 350מ"ל',        price:150},
+  {name:'ארגז ספרייט זירו זכוכית 350מ"ל',      price:150},
+  // בירה נשר זכוכית ₪141
+  {name:'ארגז בירה שחורה נשר זכוכית',           price:141},
+  // נורדיק ₪130
+  {name:'ארגז נורדיק אפרסק ללא סוכר',           price:130},
+  {name:'ארגז נורדיק לימונדה',                  price:130},
+  {name:'ארגז נורדיק פירות יער ולמון גראס',     price:130},
+  {name:'ארגז נורדיק אפרסק',                    price:130},
+];
+
+function searchProducts() {
+  const query = document.getElementById('search-input').value.trim();
+  const section = document.getElementById('search-results-section');
+  const grid = document.getElementById('search-results-grid');
+  const allSections = document.querySelectorAll('.category-header, .products-grid:not(#search-results-grid)');
+
+  if (!query) {
+    section.style.display = 'none';
+    grid.innerHTML = '';
+    allSections.forEach(el => el.style.display = '');
+    return;
+  }
+
+  const q = query.toLowerCase();
+
+  // הסתר קטגוריות רגילות
+  allSections.forEach(el => el.style.display = 'none');
+
+  // סנן כרטיסים קיימים שמתאימים
+  grid.innerHTML = '';
+  document.querySelectorAll('.products-grid:not(#search-results-grid) .product-card').forEach(card => {
+    const name = card.querySelector('.product-name').textContent.toLowerCase();
+    if (name.includes(q)) {
+      grid.appendChild(card.cloneNode(true));
+    }
+  });
+
+  // הוסף מהרשימה הנסתרת
+  catalogItems.filter(item => item.name.toLowerCase().includes(q)).forEach(item => {
+    grid.innerHTML += `
+      <div class="product-card">
+        <span class="product-emoji">🥤</span>
+        <div class="product-name">${item.name}</div>
+        <div class="product-desc">24 יחידות — זמין לפי הזמנה</div>
+        <div class="product-footer">
+          <div class="product-price">₪${item.price} <span>לארגז</span></div>
+          <button class="add-btn" onclick="selectProduct('${item.name}',${item.price})">הוסף</button>
+        </div>
+      </div>`;
+  });
+
+  section.style.display = grid.innerHTML ? '' : 'none';
+  if (!grid.innerHTML) {
+    section.style.display = 'block';
+    grid.innerHTML = '<p style="color:rgba(255,255,255,0.4); text-align:center; width:100%; padding:2rem 0;">לא נמצאו תוצאות</p>';
+  }
 }
 
 function goToOrder() {
