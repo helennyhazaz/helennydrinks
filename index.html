@@ -583,11 +583,8 @@
         <label>מה תרצה להזמין?</label>
         <textarea id="product" placeholder="לדוגמה: ארגז קולה, 2 ארגזי ספרייט, ארגז פנטה תפוז..." style="min-height: 120px;"></textarea>
       </div>
-      <button class="submit-btn" onclick="submitOrder()">שלח הזמנה בוואטסאפ ↗</button>
+      <button class="submit-btn" onclick="submitOrder()">שלח הזמנה ↗</button>
       <div class="success-msg" id="success">✓ ההזמנה נשלחה! נחזור אליך בקרוב.</div>
-      <div class="whatsapp-alt">
-        או שלח ישירות דרך <a href="https://wa.me/972502113545" target="_blank">וואטסאפ</a>
-      </div>
     </div>
   </div>
 </section>
@@ -674,11 +671,6 @@ function submitOrder() {
       הזמנה: product
     })
   });
-
-  // שלח גם בוואטסאפ
-  const msg = `הזמנה חדשה מהאתר 🥤\n\nשם: ${name}\nטלפון: ${phone}\nבניין/מגדל: ${building}\nקומה: ${floor} | דירה: ${apartment}\nתשלום: ${payment}\nהזמנה: ${product}`;
-  const url = `https://wa.me/972502113545?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank');
 
   document.getElementById('success').style.display = 'block';
 }
