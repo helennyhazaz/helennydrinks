@@ -274,25 +274,31 @@
   .footer-logo { font-size: 1.1rem; font-weight: 900; color: var(--accent); }
   .footer-text { font-size: 0.8rem; color: rgba(255,255,255,0.25); font-weight: 300; }
 
-  /* CART BUTTON */
+  /* CART FAB */
   .cart-fab {
     position: fixed; left: 1.5rem; bottom: 2rem; z-index: 150;
     background: var(--accent); color: var(--black);
     border: none; border-radius: 100px;
-    padding: 0.75rem 1.3rem;
+    padding: 0.75rem 1.4rem;
     font-family: 'Heebo', sans-serif; font-size: 0.95rem; font-weight: 900;
-    cursor: pointer; box-shadow: 0 4px 20px rgba(200,245,90,0.35);
-    display: flex; align-items: center; gap: 0.5rem;
+    cursor: pointer; box-shadow: 0 4px 24px rgba(200,245,90,0.4);
+    display: flex; align-items: center; gap: 0.6rem;
     transition: background 0.2s, transform 0.15s;
+    display: none;
   }
+  .cart-fab.show { display: flex; }
   .cart-fab:hover { background: var(--accent-dark); transform: scale(1.05); }
   .cart-fab .cart-count {
     background: var(--black); color: var(--accent);
-    border-radius: 100px; padding: 0.1rem 0.5rem;
+    border-radius: 100px; padding: 0.1rem 0.55rem;
     font-size: 0.8rem; font-weight: 900;
-    display: none;
   }
-  .cart-fab .cart-count.show { display: inline-block; }
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+  .cart-fab.pop { animation: pop 0.25s ease; }
 
   /* SUCCESS MSG */
   .success-msg {
@@ -586,6 +592,11 @@
   </div>
 </section>
 
+<!-- CART FAB -->
+<button class="cart-fab" id="cartFab" onclick="goToOrder()">
+  🛒 עגלה <span class="cart-count" id="cartCount">0</span>
+</button>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">הלני שתייה</div>
@@ -614,11 +625,22 @@ function selectWithFlavor(name, flavorId) {
   selectProduct(name + ' — ' + flavor);
 }
 
+let cartCount = 0;
+
 function selectProduct(name) {
   const ta = document.getElementById('product');
   ta.value = ta.value ? ta.value + '\n' + name : name;
+  cartCount++;
+  const fab = document.getElementById('cartFab');
+  document.getElementById('cartCount').textContent = cartCount;
+  fab.classList.add('show');
+  fab.classList.remove('pop');
+  void fab.offsetWidth;
+  fab.classList.add('pop');
+}
+
+function goToOrder() {
   document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => ta.focus(), 400);
 }
 
 function submitOrder() {
